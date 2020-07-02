@@ -16,6 +16,11 @@
     <string name="user_login__lastname">Last Name</string>
     <string name="user_login__address1">Address</string>
     <string name="user_login__address2">Apt/Spc/#</string>
+    <string name="user_login__address3_zip">Zip Code</string>
+    <string name="user_login__address3_state">State</string>
+    <string name="user_login__ssn">SSN</string>
+
     <string name="user_login__state">State</string>
     <string name="user_login__cancel">Cancel</string>
+
 </resources>

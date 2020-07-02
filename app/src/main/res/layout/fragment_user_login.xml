@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/id_user_login__login"
+        app:layout_constraintBottom_toTopOf="@+id/id_user_login__signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_user_login__email"
@@ -54,7 +54,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/id_user_login__login"
+        android:id="@+id/id_user_login__signin"
         android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:text="@string/user_login__login"
@@ -72,7 +72,7 @@
         app:layout_constraintBottom_toTopOf="@+id/id_user_login__google_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_user_login__login"
+        app:layout_constraintTop_toBottomOf="@+id/id_user_login__signin"
         app:layout_constraintVertical_chainStyle="packed" />
 
 

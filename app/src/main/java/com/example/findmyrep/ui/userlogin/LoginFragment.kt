@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -49,6 +50,14 @@ class LoginFragment : Fragment() {
 
         }
 
+        val signinButton = view.findViewById<Button>(R.id.id_user_login__signin)
+        signinButton.setOnClickListener {
+            println("user tries to signin")
+            val email = view.findViewById<EditText>(R.id.id_user_login__email_edit_text)
+            val password = view.findViewById<EditText>(R.id.id_user_login__password_edit_text)
+            userSignIn(email.text.toString(), password.text.toString())
+        }
+
 //        val googleSignUp = view.findViewById<Button>(R.id.id_user_login__google_sign_up)
 //        googleSignUp.setOnClickListener {
 //            signupWithGoogle(view)
@@ -86,5 +95,10 @@ class LoginFragment : Fragment() {
 //    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
 //        println("handle sign in result")
 //    }
+    fun userSignIn(email :String, password :String) {
+        println("email: $email")
+        println("pasword:$password")
+
+    }
 
 }
