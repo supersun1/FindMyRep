@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "457544774196",
+    "firebase_url": "https://findmyrep-60e49.firebaseio.com",
+    "project_id": "findmyrep-60e49",
+    "storage_bucket": "findmyrep-60e49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457544774196:android:a164cafbfe3929a5019061",
+        "android_client_info": {
+          "package_name": "com.voices.findmyrep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457544774196-kfvuqip1i482ils3g9ebkdc4jfieavij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.voices.findmyrep",
+            "certificate_hash": "2ae06fae0ce4620e915e248b56328f904a3aa732"
+          }
+        },
+        {
+          "client_id": "457544774196-1i8nul956r3kql3f8n200h41kue5mp5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSBC6z8z8UX_8I9PKJbabJIpOfjCZh8-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457544774196-aj1nhj4b7m4cksdvqd5hn0mj20tatn0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

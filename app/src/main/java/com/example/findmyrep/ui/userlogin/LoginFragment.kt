@@ -1,6 +1,5 @@
 package com.example.findmyrep.ui.userlogin
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.findmyrep.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
+    private var mAuth: FirebaseAuth? = null
 
     companion object {
         var RC_SIGN_IN = 1
@@ -34,7 +33,13 @@ class LoginFragment : Fragment() {
        loginViewModel =
             ViewModelProviders.of(this).get(LoginViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_user_login, container, false)
-        
+
+        // initialize firebase authentication.
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth!!.currentUser
+
+        // if user logs in, update the UI
+
         return root
     }
 
@@ -42,15 +47,17 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val signupButton = view.findViewById<Button>(R.id.id_user_login__signup)
+
         signupButton.setOnClickListener {
             // new fragment to sign up
             println("regular sign up")
 
             findNavController().navigate(R.id.navigation_signup)
-
         }
 
         val signinButton = view.findViewById<Button>(R.id.id_user_login__signin)
+
+
         signinButton.setOnClickListener {
             println("user tries to signin")
             val email = view.findViewById<EditText>(R.id.id_user_login__email_edit_text)

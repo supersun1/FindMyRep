@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/navigation_signup"
-        android:name="com.example.findmyrep.ui.userlogin.SignupFragment"
+        android:name="com.example.findmyrep.ui.usersignup.SignupFragment"
         android:label="@string/user_login__sign_up"
         tools:layout="@layout/fragment_user_signup" />
 </navigation>
