@@ -6,16 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.findmyrep.Objects.User
 import com.example.findmyrep.R
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_user_signup.*
+import java.util.*
 
 
 class SignupFragment : Fragment() {
@@ -60,6 +65,7 @@ class SignupFragment : Fragment() {
         signupButton.setOnClickListener {
             println("regular sign up")
             fetchUserInput()
+            transferToSigninFragment()
 
         }
 
@@ -80,22 +86,23 @@ class SignupFragment : Fragment() {
         password = id_user_signup__password_edit_text
         confirmPassword = id_user_signup__confirm_password_editText
         submitInfoToFireBase()
-
+        signupUsingFirebaseAuth()
 
     }
 
 
     private fun populateStateDropDown() {
         val states = resources.getStringArray(R.array.States)
-        val spinner = id_user_signup__address3_state_spinner
+        val spinner = view?.findViewById<Spinner>(R.id.id_user_signup__address3_state_spinner)
+
         if (spinner != null) {
-            val adapter = ArrayAdapter(requireActivity().applicationContext, android.R.layout.simple_spinner_item, states)
+            val adapter = ArrayAdapter(requireActivity().applicationContext, android.R.layout.simple_spinner_dropdown_item, states)
             spinner.adapter = adapter
         }
     }
 
     private fun submitInfoToFireBase() {
-        val userId = "123"
+        val userId = UUID.randomUUID().toString()
         val user = User(userId)
         user.firstName = firstName?.text.toString()
         user.lastName = lastName?.text.toString()
@@ -107,12 +114,18 @@ class SignupFragment : Fragment() {
 
 
         firebase.child("user").child(userId).setValue(user)
+    }
 
+    private fun signupUsingFirebaseAuth() {
+        mAuth?.createUserWithEmailAndPassword(email.toString(), password.toString())
     }
 
     private fun matchSpinnerToState(): String {
         return "California"
     }
 
+    private fun transferToSigninFragment() {
+        getFragmentManager()?.popBackStackImmediate();
+    }
 
 }

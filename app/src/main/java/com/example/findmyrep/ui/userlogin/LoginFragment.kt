@@ -38,6 +38,8 @@ class LoginFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth!!.currentUser
 
+        updateUI(currentUser)
+
         // if user logs in, update the UI
 
         return root
@@ -65,11 +67,7 @@ class LoginFragment : Fragment() {
             userSignIn(email.text.toString(), password.text.toString())
         }
 
-//        val googleSignUp = view.findViewById<Button>(R.id.id_user_login__google_sign_up)
-//        googleSignUp.setOnClickListener {
-//            signupWithGoogle(view)
-////            println("google sign in")
-//        }
+
     }
 
 
@@ -103,9 +101,23 @@ class LoginFragment : Fragment() {
 //        println("handle sign in result")
 //    }
     fun userSignIn(email :String, password :String) {
-        println("email: $email")
-        println("pasword:$password")
+    println("email: $email")
+    println("pasword:$password")
 
+    mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener {task ->
+        if (task.isSuccessful) {
+            println("user signed in successfully")
+        } else {
+            println("user sign in failed")
+        }
+
+    }
+}
+
+    private fun updateUI(user: FirebaseUser?) {
+        System.out.println("update ui")
     }
 
 }
+
+

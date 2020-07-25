@@ -135,9 +135,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:spinnerMode="dropdown"
-                android:prompt="@string/user_login__address3_state"
-
-                />
+                android:hint="@string/user_login__address3_state" />
 
             <EditText
                 android:id="@+id/id_user_signup__address3_zipcode_edit_text"
