@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.example.findmyrep.Objects.User
 import com.example.findmyrep.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
-    private var mAuth: FirebaseAuth? = null
+    private lateinit var mAuth: FirebaseAuth
 
     companion object {
         var RC_SIGN_IN = 1
@@ -34,13 +35,10 @@ class LoginFragment : Fragment() {
             ViewModelProviders.of(this).get(LoginViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_user_login, container, false)
 
-        // initialize firebase authentication.
+//        // initialize firebase authentication.
         mAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuth!!.currentUser
-
-        updateUI(currentUser)
-
-        // if user logs in, update the UI
+//        val currentUser = mAuth!!.currentUser
+//        updateUI(currentUser)
 
         return root
     }
@@ -71,9 +69,6 @@ class LoginFragment : Fragment() {
     }
 
 
-
-
-
     fun signupWithGoogle(view: View) {
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -84,35 +79,14 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-//        if (requestCode == RC_SIGN_IN) {
-//            // The Task returned from this call is always completed, no need to attach
-//            // a listener.
-//            val task =
-//                GoogleSignIn.getSignedInAccountFromIntent(data)
-//            handleSignInResult(task)
-//        }
-//    }
-//    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-//        println("handle sign in result")
-//    }
     fun userSignIn(email :String, password :String) {
-    println("email: $email")
-    println("pasword:$password")
-
-    mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener {task ->
-        if (task.isSuccessful) {
-            println("user signed in successfully")
-        } else {
-            println("user sign in failed")
+        mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
+            if(task.isSuccessful) {
+                println("login success")
+                findNavController().navigate(R.id.navigation_user_profile)
+            }
         }
-
     }
-}
 
     private fun updateUI(user: FirebaseUser?) {
         System.out.println("update ui")

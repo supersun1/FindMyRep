@@ -77,4 +77,8 @@
     </string-array>
 
 
+<!--    user profile    -->
+    <string name="user_login__user_profile">User Profile</string>
+
+
 </resources>

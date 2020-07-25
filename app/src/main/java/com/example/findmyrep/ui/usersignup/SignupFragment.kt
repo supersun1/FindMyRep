@@ -2,13 +2,11 @@ package com.example.findmyrep.ui.usersignup
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +17,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.fragment_user_login.*
 import kotlinx.android.synthetic.main.fragment_user_signup.*
 import java.util.*
 
@@ -61,20 +60,27 @@ class SignupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val signupButton = id_user_signup__signup_button
+        val cancelButton = id_user_signup__cancel_button
 
         signupButton.setOnClickListener {
             println("regular sign up")
-            fetchUserInput()
-            transferToSigninFragment()
+            val isValid = fetchUserInput()
 
+            if (isValid) {
+                signupUsingFirebaseAuth(email?.text.toString(), password?.text.toString())
+                transferToSigninFragment()
+            }
+
+        }
+
+        cancelButton.setOnClickListener {
+            backTrackToPrevious()
         }
 
 
     }
 
-    private fun fetchUserInput() {
-        println("here")
-        println("yoyoyo")
+    private fun fetchUserInput(): Boolean{
         firstName = id_user_signup__firstname_edit_text
         lastName = id_user_signup__lastname_edit_text
         address1 = id_user_signup__address1_edit_text
@@ -85,8 +91,7 @@ class SignupFragment : Fragment() {
         email = id_user_signup__email_edit_text
         password = id_user_signup__password_edit_text
         confirmPassword = id_user_signup__confirm_password_editText
-        submitInfoToFireBase()
-        signupUsingFirebaseAuth()
+        return submitInfoToFireBase()
 
     }
 
@@ -101,7 +106,7 @@ class SignupFragment : Fragment() {
         }
     }
 
-    private fun submitInfoToFireBase() {
+    private fun submitInfoToFireBase(): Boolean {
         val userId = UUID.randomUUID().toString()
         val user = User(userId)
         user.firstName = firstName?.text.toString()
@@ -112,12 +117,27 @@ class SignupFragment : Fragment() {
         user.state = matchSpinnerToState()
         user.zipcode = zipcode?.text.toString()
 
+        if (!validateInput(user, password?.text.toString(), confirmPassword?.text.toString())) {
+            return false
+        }
 
         firebase.child("user").child(userId).setValue(user)
+        return true;
     }
 
-    private fun signupUsingFirebaseAuth() {
-        mAuth?.createUserWithEmailAndPassword(email.toString(), password.toString())
+    private fun signupUsingFirebaseAuth(email: String, password: String) {
+
+        if (email != "" && password != "") {
+            println("email and passwowrd okay")
+            mAuth!!.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if(!it.isSuccessful) {
+                        println("user auth creation was not successful")
+                        return@addOnCompleteListener
+                    }
+                    println("Successfuly created user with uuid: ${it.result?.user?.uid}")
+                }
+        }
     }
 
     private fun matchSpinnerToState(): String {
@@ -125,7 +145,41 @@ class SignupFragment : Fragment() {
     }
 
     private fun transferToSigninFragment() {
+        Toast.makeText(requireContext(), "You're All Signed Up! Please Login.", Toast.LENGTH_LONG).show()
+        backTrackToPrevious()
+    }
+
+    private fun backTrackToPrevious() {
+        Thread.sleep(100L)
         getFragmentManager()?.popBackStackImmediate();
+    }
+
+    //TODO: change true to isValid
+    private fun validateInput(user: User, password: String, confirmPassword: String): Boolean {
+
+        var isValid = true
+
+        if(user.firstName == "") {
+            Toast.makeText(requireContext(), "First Name Required", Toast.LENGTH_SHORT).show()
+            isValid = false
+        } else if (user.lastName == "") {
+            Toast.makeText(requireContext(), "Last Name Required", Toast.LENGTH_SHORT).show()
+            isValid = false
+        } else if (user.email == "") {
+            Toast.makeText(requireContext(), "Email Required", Toast.LENGTH_SHORT).show()
+            isValid = false
+        } else if (password == "") {
+            Toast.makeText(requireContext(), "Password Required", Toast.LENGTH_SHORT).show()
+            isValid = false
+        } else if (password.length < 6) {
+            Toast.makeText(requireContext(), "Password Must Contain 6 Characters", Toast.LENGTH_SHORT).show()
+            isValid = false
+        } else if (password != confirmPassword) {
+            Toast.makeText(requireContext(), "Password Does Not Match", Toast.LENGTH_SHORT).show()
+            isValid = false
+        }
+
+        return true
     }
 
 }

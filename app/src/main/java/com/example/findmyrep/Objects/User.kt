@@ -1,22 +1,23 @@
 package com.example.findmyrep.Objects
 
 import com.google.firebase.database.IgnoreExtraProperties
+import com.example.findmyrep.Objects.UserType.CITIZEN as CITIZEN1
+
+enum class UserType {
+    CITIZEN, NONCITIZEN, OFFICIALS
+}
 
 @IgnoreExtraProperties
 //data class  User(val userFirstName: String, val userLastName: String, val userAddress: String, val userAddress2: String, val userAddressState: String, val userZip: String,  val userEmail: String) {
 data class User (val id: String){
 
-//   var id : String = ""
-//    var firstName : String = userFirstName
-//    var lastName: String = userLastName
-//
-//    var address1 : String = userAddress
-//    var address2: String = userAddress2
-//    var state: String = userAddressState
-//    var zipcode: String = userZip
-//
-//    var email : String = userEmail
-
+//    var type: UserType= UserType.CITIZEN
+//        get() {
+//            return field
+//        }
+//        set(v: UserType) {
+//            field = v
+//        }
 
     var idNum: String = this.id
 
