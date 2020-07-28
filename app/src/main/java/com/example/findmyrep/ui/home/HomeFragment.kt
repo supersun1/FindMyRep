@@ -86,7 +86,7 @@ class HomeFragment : Fragment() {
             if (checkPermissionForLocation(requireContext())) {
                 getLocation()
 
-                Timer().schedule(500) {
+                Timer().schedule(250) {
                     // Execute Code after 500 milliseconds to allow GPS to get address
 
                     println("Current location is: " + mLastLocation.longitude + " and " + mLastLocation.latitude)
@@ -250,7 +250,7 @@ class HomeFragment : Fragment() {
         println("Attempting to Fetch Json")
 
         val baseURL = "https://civicinfo.googleapis.com/civicinfo/v2/representatives?address="
-        val apiKey = "&key=AIzaSyAAzxu2Tbb6GwjCa4WorPdt0H1dKlikh9E"
+        val apiKey = "&key=AIzaSyANpZIdTe_F3CzRpxBgxztTpQ_4YKVJJxs"
 
         formattedAddress = address.replace("\\s".toRegex(), "%20")
 
