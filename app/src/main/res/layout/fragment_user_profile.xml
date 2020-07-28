@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/id_text_user_profile"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="200dp"
+        android:layout_width="255dp"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile__default_welcome"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="hello">
+        android:paddingTop="200dp"
+        android:paddingBottom="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+
+        tools:ignore="MissingConstraints">
+
     </TextView>
 
-</LinearLayout>
+
+    <Button
+        android:id="@+id/id_user_profile__sign_out"
+        android:layout_width="255dp"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile__signout_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_text_user_profile"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

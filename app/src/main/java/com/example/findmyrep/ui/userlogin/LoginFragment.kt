@@ -1,5 +1,6 @@
 package com.example.findmyrep.ui.userlogin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +10,20 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.example.findmyrep.Objects.User
 import com.example.findmyrep.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_user_profile.*
 
 
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     companion object {
         var RC_SIGN_IN = 1
@@ -35,10 +38,13 @@ class LoginFragment : Fragment() {
             ViewModelProviders.of(this).get(LoginViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_user_login, container, false)
 
-//        // initialize firebase authentication.
         mAuth = FirebaseAuth.getInstance()
-//        val currentUser = mAuth!!.currentUser
-//        updateUI(currentUser)
+
+        val user : FirebaseUser? = mAuth.currentUser
+        if (user != null) {
+            println("user is not null")
+            findNavController().navigate(R.id.navigation_user_profile)
+        }
 
         return root
     }
@@ -80,18 +86,13 @@ class LoginFragment : Fragment() {
     }
 
     fun userSignIn(email :String, password :String) {
-        mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
             if(task.isSuccessful) {
                 println("login success")
                 findNavController().navigate(R.id.navigation_user_profile)
             }
         }
     }
-
-    private fun updateUI(user: FirebaseUser?) {
-        System.out.println("update ui")
-    }
-
 }
 
 

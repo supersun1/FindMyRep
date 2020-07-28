@@ -1,23 +1,23 @@
 package com.example.findmyrep.ui.usersignup
 
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.annotation.NonNull
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.findmyrep.Objects.User
 import com.example.findmyrep.R
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.fragment_user_login.*
 import kotlinx.android.synthetic.main.fragment_user_signup.*
 import java.util.*
 
@@ -25,7 +25,9 @@ import java.util.*
 class SignupFragment : Fragment() {
 
     private lateinit var signupViewModel: SignupViewModel
-    private var mAuth: FirebaseAuth? = null
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var firebase: DatabaseReference
+    private lateinit var user: User
 
     private var firstName: EditText? = null
     private var lastName: EditText? = null
@@ -37,7 +39,6 @@ class SignupFragment : Fragment() {
     private var password: EditText? = null
     private var confirmPassword : EditText? = null
 
-    private lateinit var firebase: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,10 +48,7 @@ class SignupFragment : Fragment() {
         signupViewModel =
             ViewModelProviders.of(this).get(SignupViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_user_signup, container, false)
-
         mAuth = FirebaseAuth.getInstance()
-        populateStateDropDown()
-
         firebase = FirebaseDatabase.getInstance().reference
 
         return root
@@ -63,21 +61,17 @@ class SignupFragment : Fragment() {
         val cancelButton = id_user_signup__cancel_button
 
         signupButton.setOnClickListener {
-            println("regular sign up")
             val isValid = fetchUserInput()
 
             if (isValid) {
                 signupUsingFirebaseAuth(email?.text.toString(), password?.text.toString())
                 transferToSigninFragment()
             }
-
         }
 
         cancelButton.setOnClickListener {
             backTrackToPrevious()
         }
-
-
     }
 
     private fun fetchUserInput(): Boolean{
@@ -91,24 +85,23 @@ class SignupFragment : Fragment() {
         email = id_user_signup__email_edit_text
         password = id_user_signup__password_edit_text
         confirmPassword = id_user_signup__confirm_password_editText
-        return submitInfoToFireBase()
-
+        return validateInput()
     }
 
 
-    private fun populateStateDropDown() {
-        val states = resources.getStringArray(R.array.States)
-        val spinner = view?.findViewById<Spinner>(R.id.id_user_signup__address3_state_spinner)
+//    private fun populateStateDropDown() {
+//        val states = resources.getStringArray(R.array.States)
+//        val spinner = view?.findViewById<Spinner>(R.id.id_user_signup__address3_state_spinner)
+//
+//        if (spinner != null) {
+//            val adapter = ArrayAdapter(requireActivity().applicationContext, android.R.layout.simple_spinner_dropdown_item, states)
+//            spinner.adapter = adapter
+//        }
+//    }
 
-        if (spinner != null) {
-            val adapter = ArrayAdapter(requireActivity().applicationContext, android.R.layout.simple_spinner_dropdown_item, states)
-            spinner.adapter = adapter
-        }
-    }
-
-    private fun submitInfoToFireBase(): Boolean {
+    private fun validateInput(): Boolean {
         val userId = UUID.randomUUID().toString()
-        val user = User(userId)
+        user = User(userId)
         user.firstName = firstName?.text.toString()
         user.lastName = lastName?.text.toString()
         user.address1 = address1?.text.toString()
@@ -120,24 +113,41 @@ class SignupFragment : Fragment() {
         if (!validateInput(user, password?.text.toString(), confirmPassword?.text.toString())) {
             return false
         }
-
-        firebase.child("user").child(userId).setValue(user)
         return true;
     }
 
     private fun signupUsingFirebaseAuth(email: String, password: String) {
+        mAuth.signOut()
 
         if (email != "" && password != "") {
             println("email and passwowrd okay")
-            mAuth!!.createUserWithEmailAndPassword(email, password)
+
+            mAuth.createUserWithEmailAndPassword(email.trim(), password.trim())
                 .addOnCompleteListener {
-                    if(!it.isSuccessful) {
+                    if(it.isSuccessful) {
+                        println("Successfuly created user with uuid: ${it.result?.user?.uid}")
+                        storeUserInFirebase()
+
+                    } else {
                         println("user auth creation was not successful")
                         return@addOnCompleteListener
                     }
-                    println("Successfuly created user with uuid: ${it.result?.user?.uid}")
                 }
         }
+    }
+
+    private fun storeUserInFirebase() {
+        val userId: String = mAuth.currentUser!!.uid
+        val user = User(userId)
+        user.firstName = firstName?.text.toString()
+        user.lastName = lastName?.text.toString()
+        user.address1 = address1?.text.toString()
+        user.address2 = address2?.text.toString()
+        user.email = email?.text.toString()
+        user.state = matchSpinnerToState()
+        user.zipcode = zipcode?.text.toString()
+
+        firebase.child("user").child(userId).setValue(user)
     }
 
     private fun matchSpinnerToState(): String {
@@ -145,6 +155,7 @@ class SignupFragment : Fragment() {
     }
 
     private fun transferToSigninFragment() {
+        mAuth.signOut()
         Toast.makeText(requireContext(), "You're All Signed Up! Please Login.", Toast.LENGTH_LONG).show()
         backTrackToPrevious()
     }
