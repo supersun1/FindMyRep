@@ -8,7 +8,7 @@ import android.os.Looper
 import android.widget.TextView
 
 class SplashActivity : AppCompatActivity() {
-    private val DEFAULT_SPLASH_TIME:Long = 6000
+    private val DEFAULT_SPLASH_TIME:Long = 300
     private val DEFAULT_SPLASH_TITLE:String = "Let Your Voice Be Heard"
 
     override fun onCreate(savedInstanceState: Bundle?) {

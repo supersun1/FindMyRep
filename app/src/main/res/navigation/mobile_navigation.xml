@@ -22,4 +22,31 @@
         android:name="com.example.findmyrep.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_userlogin"
+        android:name="com.example.findmyrep.ui.userlogin.LoginFragment"
+        android:label="@string/user_login__login"
+        tools:layout="@layout/fragment_user_login" >
+        <action
+            android:id="@+id/action_navigation_userlogin_to_navigation_signup"
+            app:destination="@id/navigation_signup"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_userlogin_to_navigation_user_profile"
+            app:destination="@id/navigation_user_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_signup"
+        android:name="com.example.findmyrep.ui.usersignup.SignupFragment"
+        android:label="@string/user_login__sign_up"
+        tools:layout="@layout/fragment_user_signup" />
+
+    <fragment
+        android:id="@+id/navigation_user_profile"
+        android:name="com.example.findmyrep.ui.profile.ProfileFragment"
+        android:label="@string/user_login__user_profile"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>
