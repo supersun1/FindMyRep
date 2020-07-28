@@ -1,5 +1,6 @@
 package com.example.findmyrep.ui.profile
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_user_profile.*
+
 
 class ProfileFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
@@ -67,7 +69,7 @@ class ProfileFragment : Fragment() {
         println("user name is : $name")
 
         val editText = id_text_user_profile
-        editText.text = "welcome $name"
+        editText.text = "Welcome $name"
     }
 }
 
