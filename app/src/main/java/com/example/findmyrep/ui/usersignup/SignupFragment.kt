@@ -1,7 +1,6 @@
 package com.example.findmyrep.ui.usersignup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.findmyrep.Objects.User
 import com.example.findmyrep.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_user_signup.*
@@ -87,17 +83,6 @@ class SignupFragment : Fragment() {
         confirmPassword = id_user_signup__confirm_password_editText
         return validateInput()
     }
-
-
-//    private fun populateStateDropDown() {
-//        val states = resources.getStringArray(R.array.States)
-//        val spinner = view?.findViewById<Spinner>(R.id.id_user_signup__address3_state_spinner)
-//
-//        if (spinner != null) {
-//            val adapter = ArrayAdapter(requireActivity().applicationContext, android.R.layout.simple_spinner_dropdown_item, states)
-//            spinner.adapter = adapter
-//        }
-//    }
 
     private fun validateInput(): Boolean {
         val userId = UUID.randomUUID().toString()
@@ -190,7 +175,7 @@ class SignupFragment : Fragment() {
             isValid = false
         }
 
-        return true
+        return isValid
     }
 
 }

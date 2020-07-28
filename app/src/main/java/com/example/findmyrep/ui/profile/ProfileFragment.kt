@@ -69,8 +69,6 @@ class ProfileFragment : Fragment() {
         val editText = id_text_user_profile
         editText.text = "welcome $name"
     }
-
-
 }
 
 
