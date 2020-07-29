@@ -8,7 +8,7 @@ android:id="@+id/constraintLayout"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="#136BC6"
-tools:context="com.example.findmyrep.ui.dashboardreplist.RepresentativeList">
+tools:context="com.example.findmyrep.ui.homereplist.RepresentativeList">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRepList"

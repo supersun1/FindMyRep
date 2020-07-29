@@ -1,4 +1,4 @@
-package com.example.findmyrep.ui.dashboardrepinfo
+package com.example.findmyrep.ui.homerepinfo
 
 import android.view.LayoutInflater
 import android.view.View

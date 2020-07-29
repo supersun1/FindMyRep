@@ -1,13 +1,13 @@
-package com.example.findmyrep.ui.dashboardrepinfo
+package com.example.findmyrep.ui.homereplist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class RepresentativeInfoViewModel : ViewModel() {
+class RepresentativeListViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is an Representative Info Fragment"
+        value = "This is an Representative List Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.findmyrep.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_representativeList"
+            app:destination="@id/navigation_rep_list" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -49,4 +53,18 @@
         android:name="com.example.findmyrep.ui.profile.ProfileFragment"
         android:label="@string/user_login__user_profile"
         tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/navigation_rep_info"
+        android:name="com.example.findmyrep.ui.homerepinfo.RepresentativeInfo"
+        android:label="representative_info_fragment"
+        tools:layout="@layout/representative_info_fragment" />
+    <fragment
+        android:id="@+id/navigation_rep_list"
+        android:name="com.example.findmyrep.ui.homereplist.RepresentativeList"
+        android:label="representative_list_fragment"
+        tools:layout="@layout/representative_list_fragment">
+        <action
+            android:id="@+id/action_representativeList_to_representativeInfo"
+            app:destination="@id/navigation_rep_info" />
+    </fragment>
 </navigation>

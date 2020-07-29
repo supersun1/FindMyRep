@@ -1,4 +1,4 @@
-package com.example.findmyrep.ui.dashboardreplist
+package com.example.findmyrep.ui.homereplist
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -40,7 +40,6 @@ class RepresentativeList : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(RepresentativeListViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

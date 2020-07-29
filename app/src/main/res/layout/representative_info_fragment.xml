@@ -6,18 +6,226 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#136BC6"
-    tools:context="com.example.findmyrep.ui.dashboardrepinfo.RepresentativeInfo">
+    tools:context="com.example.findmyrep.ui.homerepinfo.RepresentativeInfo">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRepInfo"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="54dp"
+        android:background="@drawable/layout_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <ImageView
+            android:id="@+id/facebookImageView"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/icons8_facebook_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/websiteImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/twitterImageView"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/icons8_twitter_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/facebookImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/youtubeImageView"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/icons8_youtube_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/twitterImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/websiteImageView"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/icons8_internet_100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="394dp"
+        android:layout_height="255dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/layout_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/repImageView"
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="16dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/repNameTextView"
+            android:layout_width="185dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="12dp"
+            android:text="Rep Name"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/repTitleTextView"
+            app:layout_constraintEnd_toStartOf="@+id/repImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/repTitleTextView"
+            android:layout_width="185dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="126dp"
+            android:text="Rep Title"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/repImageView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/partyTextView"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:text="Political Party"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repImageView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="335dp"
+        android:layout_height="325dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/layout_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <TextView
+            android:id="@+id/mailingAddressTextView"
+            android:layout_width="160dp"
+            android:layout_height="104dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="78dp"
+            android:text="Mailing Address"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="160dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="78dp"
+            android:layout_marginBottom="75dp"
+            android:text="Email"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneTextView" />
+
+        <TextView
+            android:id="@+id/phoneTextView"
+            android:layout_width="160dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="78dp"
+            android:text="Phone Number"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mailingAddressTextView" />
+
+        <ImageView
+            android:id="@+id/mailImageView"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/icons8_email_open_100"
+            app:layout_constraintEnd_toStartOf="@+id/mailingAddressTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/phoneImageView"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="66dp"
+            android:layout_marginEnd="22dp"
+            android:src="@drawable/icons8_phone_64"
+            app:layout_constraintEnd_toStartOf="@+id/phoneTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mailImageView" />
+
+        <ImageView
+            android:id="@+id/emailImageView"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="75dp"
+            android:src="@drawable/icons8_email_64"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/emailTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneImageView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
