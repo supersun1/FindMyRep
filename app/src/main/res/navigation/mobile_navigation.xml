@@ -15,11 +15,11 @@
             app:destination="@id/navigation_rep_list" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.findmyrep.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:name="com.example.findmyrep.ui.dashboard.DashboardFragment"-->
+<!--        android:label="@string/title_dashboard"-->
+<!--        tools:layout="@layout/fragment_dashboard" />-->
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -67,4 +67,27 @@
             android:id="@+id/action_representativeList_to_representativeInfo"
             app:destination="@id/navigation_rep_info" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_elections"
+        android:name="com.example.findmyrep.ui.elections.ElectionsFragment"
+        android:label="Elections"
+        tools:layout="@layout/fragment_elections" >
+        <action
+            android:id="@+id/action_navigation_elections_to_electionCalendarFragment"
+            app:destination="@id/electionCalendarFragment" />
+        <action
+            android:id="@+id/action_navigation_elections_to_voteMailFragment"
+            app:destination="@id/voteMailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/voteMailFragment"
+        android:name="com.example.findmyrep.ui.votebymail.VoteMailFragment"
+        android:label="vote_mail_fragment"
+        tools:layout="@layout/vote_mail_fragment" />
+    <fragment
+        android:id="@+id/electionCalendarFragment"
+        android:name="com.example.findmyrep.ui.elections_calendar.ElectionCalendarFragment"
+        android:label="fragment_election_calendar"
+        tools:layout="@layout/fragment_election_calendar" />
 </navigation>
